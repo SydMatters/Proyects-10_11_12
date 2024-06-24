@@ -140,25 +140,25 @@ function graficBots(x, y, z, showCenter = true) {
   ];
 
   // Asigna los valores de brainArray a la matriz
-  matriz[0][0] = brainArray[z][x - 1 + y * 100]; // Vecino a la izquierda
-  matriz[0][1] = brainArray[z][x + 1 + y * 100]; // Vecino a la derecha
-  matriz[0][2] = brainArray[z][x - 1 + (y - 1) * 100]; // Vecino arriba-izquierda
-  matriz[1][0] = brainArray[z][x + 1 + (y - 1) * 100]; // Vecino arriba-derecha
+  matriz[1][0] = brainArray[z][x - 1 + y * 100]; // Vecino a la izquierda
+  matriz[1][2] = brainArray[z][x + 1 + y * 100]; // Vecino a la derecha
+  matriz[0][0] = brainArray[z][x - 1 + (y - 1) * 100]; // Vecino arriba-izquierda
+  matriz[0][2] = brainArray[z][x + 1 + (y - 1) * 100]; // Vecino arriba-derecha
   if (showCenter) {
     matriz[1][1] = brainArray[z][x + y * 100]; // Punto central
   } else {
     matriz[1][1] = "  "; // Si showCenter es false, deja el punto central vacío
   }
-  matriz[1][2] = brainArray[z][x + (y - 1) * 100]; // Vecino arriba
+  matriz[0][1] = brainArray[z][x + (y - 1) * 100]; // Vecino arriba
   matriz[2][0] = brainArray[z][x - 1 + (y + 1) * 100]; // Vecino abajo-izquierda
-  matriz[2][1] = brainArray[z][x + 1 + (y + 1) * 100]; // Vecino abajo-derecha
-  matriz[2][2] = brainArray[z][x + (y + 1) * 100]; // Vecino abajo
+  matriz[2][2] = brainArray[z][x + 1 + (y + 1) * 100]; // Vecino abajo-derecha
+  matriz[2][1] = brainArray[z][x + (y + 1) * 100]; // Vecino abajo
 
   // Imprime la matriz en formato de tabla
   for (let i = 0; i < 3; i++) {
     if (i == 0) {
       console.log("---------------"); // Línea superior de la tabla
-    }
+    } 
     console.log("|", matriz[i].join(" | "), "|"); // Imprime la fila de la matriz con separadores
     console.log("---------------"); // Línea entre filas de la tabla
   }
@@ -214,8 +214,8 @@ function printPage(z) {
       process.stdout.write(String.fromCharCode(0x2014).repeat(9) + x / 10);//si es divisible imprime 9 guiones y lo divide por diez (imprime la decena del numero)
     }
   }
-  process.stdout.write(String.fromCharCode(0x2014).repeat(9));//imprime 9 guiones para espaciar correctamente las unidades
-  console.log("");//se llama la funcion console.log sin nada, para realiza un salto de linea
+  process.stdout.write(String.fromCharCode(0x2014).repeat(9) + '\n');//imprime 9 guiones para espaciar correctamente las unidades
+  
   process.stdout.write("  ");//se imprimen 3 espacios en linea, para espaciar correctamente las unidades
   for (x = 0; x < 100; x++) {//bucle for que va de 0 a 100
     if (x > 9) {//si el numero es mayor a 9, se imprime el resto de la division por 10 del numero, osea, la unidad
@@ -301,7 +301,7 @@ function findMaxLine() {
   }
 
   if (p === 0) {//si no se encuentra ninguna pagina con lineas sospechosas
-    console.log("\nNo se encontraron líneas sospechosas o hubo mas de 1 pagina con un mismo maximo\n");
+    console.log("\nNo se encontraron líneas sospechosas\n");
   } else {
     console.log(`\nLa página con el mayor número de líneas sospechosas es: ${p} con ${maxLines} líneas\n`);
   }
